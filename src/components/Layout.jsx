@@ -77,7 +77,7 @@ export default function ResponsiveLayout() {
         {/* Right Sidebar (Responsive Drawer with Scroll) */}
         <aside className="fixed inset-y-0 w-1/4 right-0 z-40 transform transition-transform lg:static lg:translate-x-0 hidden lg:block">
           <div className="flex flex-col h-full overflow-y-auto sidebar-scrollbar p-4">
-            <h2 className="text-sm border-b border-gray-400 pb-2 font-semibold text-gray-600 uppercase mb-2">
+            <h2 className="text-sm border-b border-gray-400 pb-2 font-semibold text-gray-600 dark:text-gray-300 uppercase mb-2">
               <span>Recent Posts</span>
             </h2>
             {user ? (

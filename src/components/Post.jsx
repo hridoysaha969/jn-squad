@@ -44,6 +44,7 @@ const Post = () => {
           src="/jn_logo.png"
           height={50}
           width={80}
+          loading="lazy"
           alt="Post Image"
           className="aspect-[4/3] md:aspect-video object-cover w-full rounded-md"
         />
