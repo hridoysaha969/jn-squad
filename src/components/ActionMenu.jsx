@@ -5,8 +5,21 @@ import { useEffect, useState } from "react";
 import Menus from "./Menus";
 
 const ActionMenu = () => {
+  const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const storedPreference = localStorage.getItem("theme");
+    const isDarkPreferred =
+      storedPreference === "dark" ||
+      (!storedPreference &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    setIsDark(isDarkPreferred);
+    root.classList.toggle("dark", isDarkPreferred);
+  }, []);
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
@@ -59,7 +72,14 @@ const ActionMenu = () => {
         )}
       </div>
 
-      {showMenu && <Menus user={user} setShowMenu={setShowMenu} />}
+      {showMenu && (
+        <Menus
+          user={user}
+          setShowMenu={setShowMenu}
+          isDark={isDark}
+          setIsDark={setIsDark}
+        />
+      )}
     </div>
   );
 };

@@ -10,23 +10,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const Menus = ({ user, setShowMenu }) => {
-  const [isDark, setIsDark] = useState(false);
+const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
+  // const [isDark, setIsDark] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState("");
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const storedPreference = localStorage.getItem("theme");
-    const isDarkPreferred =
-      storedPreference === "dark" ||
-      (!storedPreference &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    setIsDark(isDarkPreferred);
-    root.classList.toggle("dark", isDarkPreferred);
-  }, []);
 
   const handleChange = (e) => {
     const root = document.documentElement;

@@ -1,43 +1,44 @@
 /* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/ui/marquee";
+import Image from "next/image";
 
 const reviews = [
   {
     name: "Jack",
     username: "@jack",
     body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
+    img: "/1.png",
   },
   {
     name: "Jill",
     username: "@jill",
     body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
+    img: "/2.png",
   },
   {
     name: "John",
     username: "@john",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
+    img: "/3.png",
   },
   {
     name: "Jane",
     username: "@jane",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
+    img: "/4.png",
   },
   {
     name: "Jenny",
     username: "@jenny",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
+    img: "/5.png",
   },
   {
     name: "James",
     username: "@james",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    img: "/6.png",
   },
 ];
 
@@ -46,24 +47,30 @@ const secondRow = reviews.slice(reviews.length / 2);
 
 const ReviewCard = ({ img, name, username, body }) => {
   return (
-    <figure className="relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4 border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05] dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]">
-      <div className="flex flex-row items-center gap-2">
-        <img className="rounded-full" width="32" height="32" alt="" src={img} />
-        <div className="flex flex-col">
+    <figure className="relative w-64 cursor-pointer overflow-hidden rounded-xl border border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05] dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]">
+      <div className="aspect-[16/9]">
+        <Image
+          className="rounded-md w-full h-full"
+          width="600"
+          height="32"
+          alt={name}
+          src={img}
+        />
+        {/* <div className="flex flex-col">
           <figcaption className="text-sm font-medium dark:text-white">
             {name}
           </figcaption>
           <p className="text-xs font-medium dark:text-white/40">{username}</p>
-        </div>
+        </div> */}
       </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
+      {/* <blockquote className="mt-2 text-sm">{body}</blockquote> */}
     </figure>
   );
 };
 
 export function MarqueeDemo() {
   return (
-    <div className="relative flex order-1 md:order-2 h-screen md:w-1/2 w-full flex-col items-center justify-center overflow-hidden border bg-white md:shadow-sm">
+    <div className="relative flex order-1 md:order-2 md:h-screen h-1/2 md:w-1/2 w-full flex-col items-center justify-center overflow-hidden border bg-white md:shadow-sm">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
           <ReviewCard key={review.username} {...review} />

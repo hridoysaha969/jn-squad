@@ -119,3 +119,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8; /* Thumb color on hover */
 }
+
+@layer utilities {
+  .input-class {
+    @apply text-[16] placeholder:text-[16] rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500 outline-none py-2 px-4 w-full;
+  }
+}
