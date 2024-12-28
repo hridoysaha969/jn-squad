@@ -27,6 +27,8 @@ export function middleware(req) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|google.svg).*)", // Exclude static files
+    "/",
+    "/sign-in",
+    "/sign-up", // Exclude static files
   ],
 };
