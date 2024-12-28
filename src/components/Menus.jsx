@@ -1,3 +1,4 @@
+import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeftIcon,
@@ -10,11 +11,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
   // const [isDark, setIsDark] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState("");
+  const { logOut } = useAuth();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const root = document.documentElement;
@@ -24,6 +28,10 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
     setIsDark(isDarkMood);
     root.classList.toggle("dark", !isDark);
     localStorage.setItem("theme", selectedTheme);
+  };
+  const handleLogOut = async () => {
+    await logOut();
+    router.push("/sign-in");
   };
 
   return (
@@ -84,7 +92,10 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
         >
           <Moon className="w-5 h-5 text-violet-500" /> Dark Mood
         </li>
-        <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-row gap-2 md:items-center py-4 px-4 md:p-0 rounded-md select-none font-semibold col-span-2 md:col-span-1 mt-4 md:mt-0">
+        <li
+          className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-row gap-2 md:items-center py-4 px-4 md:p-0 rounded-md select-none font-semibold col-span-2 md:col-span-1 mt-4 md:mt-0"
+          onClick={handleLogOut}
+        >
           <LogOut className="w-5 h-5 text-violet-500" /> Logout
         </li>
       </ul>

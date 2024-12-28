@@ -55,22 +55,16 @@ const ReviewCard = ({ img, name, username, body }) => {
           height="32"
           alt={name}
           src={img}
+          priority
         />
-        {/* <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
-            {name}
-          </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
-        </div> */}
       </div>
-      {/* <blockquote className="mt-2 text-sm">{body}</blockquote> */}
     </figure>
   );
 };
 
 export function MarqueeDemo() {
   return (
-    <div className="relative flex order-1 md:order-2 md:h-screen h-1/2 md:w-1/2 w-full flex-col items-center justify-center overflow-hidden border bg-white md:shadow-sm">
+    <div className="relative flex order-1 md:order-2 md:h-screen h-1/2 md:w-1/2 w-full flex-col items-center justify-center overflow-hidden border bg-white dark:bg-gray-800 md:shadow-sm">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
           <ReviewCard key={review.username} {...review} />

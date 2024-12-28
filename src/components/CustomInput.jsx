@@ -1,4 +1,14 @@
-const CustomInput = ({ inputType, label, placeholder }) => {
+import FormMessage from "./FormMessage";
+
+const CustomInput = ({
+  inputType,
+  label,
+  name,
+  value,
+  handleChange,
+  error,
+  placeholder,
+}) => {
   return (
     <div className="form-item">
       <label className="form-label">{label}</label>
@@ -13,8 +23,11 @@ const CustomInput = ({ inputType, label, placeholder }) => {
               ? "email"
               : "text"
           }
+          name={name}
+          value={value}
+          onChange={handleChange}
         />
-        {/* <FormMessage className="form-message mt-2" /> */}
+        {error && !value && <FormMessage message={`This field is required`} />}
       </div>
     </div>
   );
