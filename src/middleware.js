@@ -30,6 +30,6 @@ export const config = {
     "/",
     "/sign-in",
     "/sign-up", // Exclude static files
-    "/((?!_next/static|_next/image|favicon.ico|public/|google.svg).*)",
+    "/profile",
   ],
 };
