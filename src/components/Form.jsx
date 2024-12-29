@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { getIdToken, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "@/lib/firebaseConfig";
-import { ref, set } from "firebase/database";
+import { get, ref, set, update } from "firebase/database";
 import { setCookie } from "cookies-next";
 
 const Form = ({ type }) => {
@@ -97,14 +97,23 @@ const Form = ({ type }) => {
       setCookie("access_token", token, { maxAge: 60 * 60 * 24 * 7, path: "/" });
 
       const userRef = ref(db, `users/${user.uid}`);
-      await set(userRef, {
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        createdAt: new Date().toISOString(),
-        uuid: user.uid,
-        metadata: user.metadata,
-      });
+
+      const snapshot = await get(userRef);
+
+      if (!snapshot.exists()) {
+        await set(userRef, {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          createdAt: new Date().toISOString(),
+          uuid: user.uid,
+          metadata: user.metadata,
+        });
+      } else {
+        await update(userRef, {
+          lastLogin: new Date().toISOString(),
+        });
+      }
       router.push("/");
     } catch (error) {
       console.log(error);
@@ -113,6 +122,7 @@ const Form = ({ type }) => {
         title: "Error signing with Google",
         description: error.message,
       });
+      setLoading(false);
     } finally {
       setLoading(false);
     }

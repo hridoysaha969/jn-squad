@@ -30,6 +30,6 @@ export const config = {
     "/",
     "/sign-in",
     "/sign-up", // Exclude static files
-    "/profile",
+    "/profile/:path*",
   ],
 };

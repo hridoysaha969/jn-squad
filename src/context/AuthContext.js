@@ -9,7 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { ref, set } from "firebase/database";
+import { get, ref, set, update } from "firebase/database";
 
 const { createContext, useEffect, useContext, useState } = require("react");
 
@@ -66,10 +66,21 @@ export const AuthProvider = ({ children }) => {
       email,
       password
     );
+    const user = userCredential.user;
     const token = await getIdToken(userCredential.user);
 
     // Set cookie for 7 days
     setCookie("access_token", token, { maxAge: 60 * 60 * 24 * 7, path: "/" });
+
+    const userRef = ref(db, `users/${user.uid}`);
+    const snapshot = await get(userRef);
+
+    if (snapshot.exists()) {
+      await update(userRef, {
+        lastLogin: new Date().toISOString(),
+      });
+    }
+
     return userCredential;
   };
 
