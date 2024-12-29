@@ -7,7 +7,7 @@ const Profile = async () => {
   return (
     <section className="pb-8">
       <div className="max-w-5xl mx-auto px-2 md:px-4 mt-2">
-        <div className="w-full aspect-[16/7] relative overflow-hidden">
+        <div className="w-full aspect-[16/7] relative overflow-hidden rounded-t-md">
           <Image
             src="/1.png"
             alt="Cover Image"
