@@ -1,6 +1,6 @@
 "use client";
 import { setCookie } from "cookies-next";
-import { auth } from "@/lib/firebaseConfig";
+import { auth, db } from "@/lib/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   getIdToken,
@@ -9,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { ref, set } from "firebase/database";
 
 const { createContext, useEffect, useContext, useState } = require("react");
 
@@ -35,13 +36,26 @@ export const AuthProvider = ({ children }) => {
     );
     const token = await getIdToken(userCredential.user);
     setCookie("access_token", token, { maxAge: 60 * 60 * 24 * 7, path: "/" });
+
     await updateProfile(auth.currentUser, {
       displayName: userName,
     });
     const user = auth.currentUser;
+
     setCurrentUser({
       ...user,
     });
+    const userUid = userCredential.user.uid;
+    const userRef = ref(db, `users/${userUid}`);
+    await set(userRef, {
+      displayName: userName,
+      email: user.email,
+      photoURL: user.photoURL,
+      createdAt: new Date().toISOString(),
+      uuid: userUid,
+      metadata: userCredential.user.metadata,
+    });
+    console.log(userCredential.user);
 
     return userCredential;
   };

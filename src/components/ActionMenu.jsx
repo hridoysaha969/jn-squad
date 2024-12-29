@@ -3,11 +3,13 @@ import { Bell, ChevronDown, Menu, Moon, Search, Sun } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Menus from "./Menus";
+import { useAuth } from "@/context/AuthContext";
 
 const ActionMenu = () => {
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [user, setUser] = useState(null);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -46,10 +48,10 @@ const ActionMenu = () => {
       </button>
 
       <div className="hidden md:block">
-        {user ? (
+        {currentUser?.photoURL ? (
           <button className="relative" onClick={handleMenu}>
             <Image
-              src="/logo.png"
+              src={currentUser.photoURL}
               width={45}
               height={45}
               alt="user"
@@ -64,7 +66,7 @@ const ActionMenu = () => {
             className="bg-gray-600 relative h-12 w-12 rounded-full flex items-center justify-center text-xl font-semibold text-gray-200"
             onClick={handleMenu}
           >
-            JN
+            {currentUser?.displayName?.charAt(0).toUpperCase()}
             <span className="absolute -bottom-[2px] right-0 h-4 w-4 rounded-full flex items-center justify-center border border-white bg-gray-200">
               <ChevronDown className="w-4 h-4 text-gray-900" />
             </span>
@@ -74,7 +76,7 @@ const ActionMenu = () => {
 
       {showMenu && (
         <Menus
-          user={user}
+          user={currentUser}
           setShowMenu={setShowMenu}
           isDark={isDark}
           setIsDark={setIsDark}

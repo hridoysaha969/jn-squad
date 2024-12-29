@@ -2,6 +2,7 @@ import { Ubuntu } from "next/font/google";
 import { Lato } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { Toaster } from "@/components/ui/toaster";
 
 const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${ubuntu.className} ${lato.className}`}>
       <body className="dark:bg-gray-950 bg-slate-100">
         <AuthProvider>{children}</AuthProvider>
+        <Toaster />
       </body>
     </html>
   );

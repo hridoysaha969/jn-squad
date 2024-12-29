@@ -1,11 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Image from "next/image";
 import CustomInput from "./CustomInput";
 import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { getIdToken, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth, db } from "@/lib/firebaseConfig";
+import { ref, set } from "firebase/database";
+import { setCookie } from "cookies-next";
 
 const Form = ({ type }) => {
   const [formData, setFormData] = useState({
@@ -17,6 +21,7 @@ const Form = ({ type }) => {
   const [error, setError] = useState(false);
   const { signUp, signIn } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleChange = (e) => {
     setFormData({
@@ -44,14 +49,13 @@ const Form = ({ type }) => {
         }
 
         await signIn(email, password);
-
+        router.push("/");
         // Reset form data
         setFormData({
           email: "",
           password: "",
         });
         setError(false);
-        router.push("/");
       } else {
         const { name, email, password } = formData;
         if (!name || !email || !password) {
@@ -60,7 +64,7 @@ const Form = ({ type }) => {
         }
 
         await signUp(email, password, name);
-
+        router.push("/");
         // Reset form data
         setFormData({
           name: "",
@@ -68,10 +72,47 @@ const Form = ({ type }) => {
           password: "",
         });
         setError(false);
-        router.push("/");
       }
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "An error occurred",
+        description: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const token = await getIdToken(user);
+      setCookie("access_token", token, { maxAge: 60 * 60 * 24 * 7, path: "/" });
+
+      const userRef = ref(db, `users/${user.uid}`);
+      await set(userRef, {
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        createdAt: new Date().toISOString(),
+        uuid: user.uid,
+        metadata: user.metadata,
+      });
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Error signing with Google",
+        description: error.message,
+      });
     } finally {
       setLoading(false);
     }
@@ -119,7 +160,7 @@ const Form = ({ type }) => {
         </div>
         <button
           type="submit"
-          className="w-full bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
+          className="w-full disabled:bg-gray-600 disabled:text-gray-300 disabled:cursor-not-allowed bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
           disabled={loading}
         >
           {type === "sign-in" ? "Sign In" : "Sign Up"}
@@ -136,8 +177,9 @@ const Form = ({ type }) => {
       </div>
 
       <button
-        className="flex items-center justify-center w-full px-4 py-2 border border-gray-400 rounded-lg bg-transparent"
+        className="flex disabled:cursor-not-allowed items-center justify-center w-full px-4 py-2 border border-gray-400 rounded-lg bg-transparent"
         disabled={loading}
+        onClick={handleGoogleSignIn}
       >
         <img
           src="/google.svg"

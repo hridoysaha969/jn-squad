@@ -6,6 +6,7 @@ import {
   Home,
   LogOut,
   Moon,
+  Newspaper,
   Settings,
   ShieldQuestion,
 } from "lucide-react";
@@ -44,24 +45,27 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
         Back
       </button>
 
-      <div className="p-3 dark:bg-gray-700 shadow-md flex items-center gap-4 rounded-md mb-4 font-semibold">
-        {user ? (
-          <Link href="/">
-            <Image
-              src="/logo.png"
-              width={45}
-              height={45}
-              alt="user"
-              className="rounded-full"
-            />
-          </Link>
+      <Link
+        href={`/profile/${user?.uid}`}
+        className="p-3 dark:bg-gray-700 shadow-md flex items-center gap-4 rounded-md mb-4 font-semibold"
+        onClick={() => setShowMenu((prevState) => !prevState)}
+      >
+        {user.photoURL ? (
+          <Image
+            src={user.photoURL}
+            width={45}
+            height={45}
+            alt="user"
+            loading="lazy"
+            className="rounded-full"
+          />
         ) : (
           <button className="bg-gray-600 h-12 w-12 rounded-full flex items-center justify-center text-xl font-semibold text-gray-200">
-            JN
+            {user?.displayName.charAt(0).toUpperCase()}
           </button>
         )}
-        Hridoy Saha
-      </div>
+        {user.displayName}
+      </Link>
 
       <ul
         className={cn(
@@ -73,8 +77,16 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
           }
         )}
       >
-        <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold md:hidden">
-          <Home className="w-5 h-5 text-violet-500" /> Home
+        <li
+          className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold"
+          onClick={() => setShowMenu((prevState) => !prevState)}
+        >
+          <Link
+            href="/"
+            className="flex md:items-center gap-2 flex-col md:flex-row"
+          >
+            <Newspaper className="w-5 h-5 text-violet-500" /> Event Feed
+          </Link>
         </li>
         <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold md:hidden">
           <ShieldQuestion className="w-5 h-5 text-violet-500" /> About Batch 16
