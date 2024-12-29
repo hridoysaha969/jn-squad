@@ -50,7 +50,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
         className="p-3 dark:bg-gray-700 capitalize shadow-md flex items-center gap-4 rounded-md mb-4 font-semibold"
         onClick={() => setShowMenu((prevState) => !prevState)}
       >
-        {user.photoURL ? (
+        {user?.photoURL ? (
           <Image
             src={user?.photoURL}
             width={45}
@@ -64,7 +64,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
             {user?.displayName.charAt(0).toUpperCase()}
           </button>
         )}
-        {user.displayName}
+        {user?.displayName}
       </Link>
 
       <ul
