@@ -47,12 +47,12 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
 
       <Link
         href={`/profile/${user?.uid}`}
-        className="p-3 dark:bg-gray-700 shadow-md flex items-center gap-4 rounded-md mb-4 font-semibold"
+        className="p-3 dark:bg-gray-700 capitalize shadow-md flex items-center gap-4 rounded-md mb-4 font-semibold"
         onClick={() => setShowMenu((prevState) => !prevState)}
       >
         {user.photoURL ? (
           <Image
-            src={user.photoURL}
+            src={user?.photoURL}
             width={45}
             height={45}
             alt="user"
