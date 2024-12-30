@@ -1,9 +1,24 @@
+"use client";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import EventModal from "./EventModal";
 
 const CreateEvent = ({ currentUser }) => {
+  const [isOpened, setIsOpened] = useState(false);
+  const openModal = () => {
+    setIsOpened(true);
+
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setIsOpened(false);
+
+    document.body.style.overflow = "";
+  };
+
   return (
     <div className="bg-white shadow-md dark:bg-gray-800 rounded-md py-3 px-4 flex gap-3 items-center">
       {currentUser?.photoURL ? (
@@ -24,9 +39,16 @@ const CreateEvent = ({ currentUser }) => {
           {currentUser?.displayName?.charAt(0).toUpperCase()}
         </Link>
       )}
-      <button className="flex-1 capitalize bg-violet-600 flex items-center justify-center gap-1 py-2 px-4 rounded-full text-white">
+      <button
+        className="flex-1 capitalize bg-violet-600 flex items-center justify-center gap-1 py-2 px-4 rounded-full text-white"
+        onClick={openModal}
+      >
         <Plus className="w-5 h-5" /> create event
       </button>
+
+      {isOpened && (
+        <EventModal closeModal={closeModal} currentUser={currentUser} />
+      )}
     </div>
   );
 };

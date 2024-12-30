@@ -11,7 +11,7 @@ const ProfileHeader = () => {
         <div className="flex items-center">
           <div className="relative md:w-24 w-20 md:h-24 h-20 rounded-full overflow-hidden">
             <Image
-              src="/1.png"
+              src={currentUser?.photoURL || "/avatar.png"}
               alt="Profile Image"
               fill
               className="h-full w-full"
