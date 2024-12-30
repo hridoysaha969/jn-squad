@@ -5,12 +5,12 @@ import UploadForm from "./UploadForm";
 const EventModal = ({ closeModal, currentUser }) => {
   if (!currentUser) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100 bg-opacity-90">
+    <div className="fixed top-0 left-0 w-full h-full inset-0 z-50 flex items-center justify-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-90 bg-opacity-90">
       {/* Modal Content */}
-      <div className="bg-white w-screen h-screen md:w-[500px] md:h-[400px] rounded-none md:rounded-lg p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+      <div className="bg-white dark:bg-gray-800 w-screen h-full md:w-[500px] md:h-[400px] rounded-none md:rounded-lg p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
         {/* Modal Top Header */}
         <div>
-          <div className="flex items-center justify-between pb-2 border-b border-gray-300">
+          <div className="flex items-center justify-between pb-2 border-b border-gray-300 dark:border-gray-500">
             <button
               onClick={closeModal}
               className="text-sm font-semibold flex items-center gap-1 md:hidden"
@@ -22,7 +22,7 @@ const EventModal = ({ closeModal, currentUser }) => {
             </h2>
             <button
               onClick={closeModal}
-              className="p-2 rounded-full hover:bg-gray-300 bg-gray-200 hidden md:block"
+              className="p-2 rounded-full dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white hover:bg-gray-300 bg-gray-200 hidden md:block"
             >
               <X className="w-5 h-5" />
             </button>
@@ -47,7 +47,7 @@ const EventModal = ({ closeModal, currentUser }) => {
               </span>
             </div>
           </div>
-          <UploadForm />
+          <UploadForm closeModal={closeModal} />
         </div>
       </div>
     </div>

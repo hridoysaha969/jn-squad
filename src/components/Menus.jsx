@@ -128,7 +128,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
             <div className="w-[80%]">
               <h2>Dark Mood</h2>{" "}
               <p className="text-sm text-gray-400">
-                Adjust the appearance of Facebook to reduce glare and give your
+                Adjust the appearance of JN Squad to reduce glare and give your
                 eyes a break.
               </p>
               <div className="mt-6 py-2 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
