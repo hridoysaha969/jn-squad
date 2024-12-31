@@ -48,11 +48,13 @@ export const AuthProvider = ({ children }) => {
     const userUid = userCredential.user.uid;
     const userRef = ref(db, `users/${userUid}`);
     await set(userRef, {
+      uuid: userUid,
       displayName: userName,
       email: user.email,
       photoURL: user.photoURL,
+      address: "",
+      group: "",
       createdAt: new Date().toISOString(),
-      uuid: userUid,
       metadata: userCredential.user.metadata,
     });
     console.log(userCredential.user);

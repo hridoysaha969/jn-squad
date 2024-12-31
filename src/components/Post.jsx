@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <article className="bg-white dark:bg-gray-800 p-2 shadow-md rounded-sm">
       <div className="flex justify-between items-center mb-2">
@@ -33,20 +33,19 @@ const Post = () => {
         </button>
       </div>
       <div className="flex flex-row gap-2 mb-1">
-        <p className="text-sm">
-          This is a dummy post text. This text will replace later by dynamic
-          text content comming from Database.{" "}
+        <p className="text-sm w-1/2" style={{ whiteSpace: "pre-line" }}>
+          {post?.description}{" "}
           <Link href="/" className="flex items-center gap-1 text-blue-400">
             View More <Forward className="w-3 h-3" />{" "}
           </Link>
         </p>
         <Image
-          src="/jn_logo.png"
+          src={post?.image}
           height={50}
           width={80}
           loading="lazy"
           alt="Post Image"
-          className="aspect-[4/3] md:aspect-video object-cover w-full rounded-md"
+          className="aspect-[4/3] md:aspect-video w-1/2 object-cover rounded-md"
         />
       </div>
       <div className="flex px-3 items-center justify-between mt-3 pt-2 border-t border-gray-300 dark:border-gray-500 gap-3">

@@ -102,11 +102,13 @@ const Form = ({ type }) => {
 
       if (!snapshot.exists()) {
         await set(userRef, {
+          uuid: user.uid,
           displayName: user.displayName,
           email: user.email,
           photoURL: user.photoURL,
+          address: "",
+          group: "",
           createdAt: new Date().toISOString(),
-          uuid: user.uid,
           metadata: user.metadata,
         });
       } else {

@@ -1,15 +1,24 @@
 "use client";
-import { BookOpen, Home, Plus, ShieldQuestion } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-import Post from "./Post";
+import { BookOpen, Home, ShieldQuestion } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import CreateEvent from "./CreateEvent";
+import EventFeed from "./EventFeed";
+import { fetchApprovedPosts } from "@/services/fetchApprovedPosts";
+import Image from "next/image";
 
 export default function ResponsiveLayout() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
+
+  useEffect(() => {
+    setLoading(true);
+    fetchApprovedPosts().then((posts) => setPosts(posts));
+    setLoading(false);
+  }, []);
+
   if (!currentUser) return null;
 
   return (
@@ -43,11 +52,7 @@ export default function ResponsiveLayout() {
           <div className="h-full">
             <CreateEvent currentUser={currentUser} />
 
-            <div className="flex flex-col gap-2 md:gap-4 mt-4">
-              <Post />
-              <Post />
-              <Post />
-            </div>
+            <EventFeed posts={posts} loading={loading} />
             <p className="text-gray-500 text-sm dark:text-gray-400 mt-4 text-center">
               No more content
             </p>
@@ -60,9 +65,9 @@ export default function ResponsiveLayout() {
             <h2 className="text-sm border-b border-gray-400 pb-2 font-semibold text-gray-600 dark:text-gray-300 uppercase mb-2">
               <span>Recent Posts</span>
             </h2>
-            {posts.length > 0 ? (
+            {!loading || posts.length > 0 ? (
               <ul className="space-y-4">
-                <li className="text-gray-700"></li>
+                <li className="text-gray-700">Post gotten</li>
               </ul>
             ) : (
               <div className="p-3 flex flex-col items-center">

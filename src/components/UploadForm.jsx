@@ -16,6 +16,7 @@ const UploadForm = ({ closeModal }) => {
   const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
   const textAreaRef = useRef(null);
   const { currentUser } = useAuth();
 
@@ -53,51 +54,65 @@ const UploadForm = ({ closeModal }) => {
     }
     console.log("User provided all the data");
 
-    // try {
-    //   let imgUrl = "";
-    //   if (postImage) {
-    //     const fileRef = storageRef(
-    //       storage,
-    //       `posts/${currentUser.uid}/${Date.now()}_${postImage.name}`
-    //     );
-    //     const snapshot = await uploadBytes(fileRef, postImage);
-    //     imgUrl = await getDownloadURL(snapshot.ref);
-    //   }
-    //   console.log("Image uploaded & url :", imgUrl);
+    try {
+      setLoading(true);
+      let imgUrl = "";
+      if (postImage) {
+        const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+        const formData = new FormData();
+        formData.append("key", apiKey);
+        formData.append("image", postImage);
 
-    //   const newPostRef = ref(db, "posts");
-    //   const postKey = push(newPostRef).key;
+        const response = await fetch("https://api.imgbb.com/1/upload", {
+          method: "POST",
+          body: formData,
+        });
 
-    //   console.log("post created & ref is :", postKey);
+        const result = await response.json();
+        if (result.success) {
+          imgUrl = result.data.url;
+          console.log("Image uploaded & url :", imgUrl);
+        } else {
+          console.log("Failed to upload");
+        }
+      }
 
-    //   const postData = {
-    //     authorId: currentUser.uid,
-    //     title: postTitle,
-    //     description: postText,
-    //     image: imgUrl,
-    //     timeStamp: Date.now(),
-    //     likes: {},
-    //     comments: {},
-    //     approved: false,
-    //   };
+      const newPostRef = ref(db, "posts");
+      const postKey = push(newPostRef).key;
 
-    //   const updates = {};
-    //   updates[`/posts/${postKey}`] = postData;
-    //   updates[`/users/${currentUser.uid}/posts/${postKey}`] = true;
+      console.log("post created & ref is :", postKey);
 
-    //   await update(ref(db), updates);
-    //   console.log("Post uploaded");
+      const postData = {
+        authorId: currentUser.uid,
+        title: postTitle,
+        description: postText,
+        image: imgUrl,
+        timeStamp: Date.now(),
+        likes: {},
+        comments: {},
+        approved: false,
+      };
 
-    //   alert("Event posted successfully!");
-    //   setPostTitle("");
-    //   setPostText("");
-    //   setPostImage(null);
-    //   setImagePreview(null);
-    //   closeModal();
-    // } catch (error) {
-    //   console.error("Error posting event:", error);
-    //   alert("Failed to post the event. Try again.");
-    // }
+      const updates = {};
+      updates[`/posts/${postKey}`] = postData;
+      updates[`/users/${currentUser.uid}/posts/${postKey}`] = true;
+
+      await update(ref(db), updates);
+      console.log("Post uploaded");
+
+      alert("Event posted successfully!");
+      setPostTitle("");
+      setPostText("");
+      setPostImage(null);
+      setImagePreview(null);
+      closeModal();
+    } catch (error) {
+      console.error("Error posting event:", error);
+      alert("Failed to post the event. Try again.");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
