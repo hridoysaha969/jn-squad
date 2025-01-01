@@ -1,7 +1,6 @@
 import Information from "@/components/Information";
-import Post from "@/components/Post";
 import ProfileHeader from "@/components/ProfileHeader";
-import SkeletonPost from "@/components/SkeletonPost";
+import UserPosts from "@/components/UserPosts";
 import Image from "next/image";
 
 const Profile = async () => {
@@ -24,9 +23,7 @@ const Profile = async () => {
             <h1 className="bg-white shadow-md dark:bg-gray-800 rounded-md p-4 text-xl  font-semibold text-gray-600 dark:text-gray-300">
               Posts
             </h1>
-            <div className="flex flex-col gap-2 md:gap-4 md:mt-4 mt-2">
-              <SkeletonPost />
-            </div>
+            <UserPosts />
           </div>
         </div>
       </div>
