@@ -169,7 +169,8 @@ const UploadForm = ({ closeModal }) => {
         disabled={
           postText.trim() === "" ||
           postImage === null ||
-          postTitle.trim() === ""
+          postTitle.trim() === "" ||
+          loading
         }
       >
         Post

@@ -15,7 +15,10 @@ export default function ResponsiveLayout() {
 
   useEffect(() => {
     setLoading(true);
-    fetchApprovedPosts().then((posts) => setPosts(posts));
+    fetchApprovedPosts().then((posts) => {
+      const sortedPosts = posts.sort((a, b) => b.timeStamp - a.timeStamp);
+      setPosts(sortedPosts);
+    });
     setLoading(false);
   }, []);
 

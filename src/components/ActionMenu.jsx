@@ -1,5 +1,5 @@
 "use client";
-import { Bell, ChevronDown, Menu, Moon, Search, Sun } from "lucide-react";
+import { Bell, ChevronDown, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Menus from "./Menus";
@@ -8,7 +8,6 @@ import { useAuth } from "@/context/AuthContext";
 const ActionMenu = () => {
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [user, setUser] = useState(null);
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -35,13 +34,6 @@ const ActionMenu = () => {
       <button className="md:bg-gray-200 dark:md:bg-gray-700 dark:text-gray-300 md:h-12 md:w-12 md:rounded-full md:flex md:items-center md:justify-center">
         <Bell className="w-5 h-5 md:w-6 md:h-6 text-gray-900 dark:text-gray-300" />
       </button>
-      {/* <button onClick={toggleDarkMood}>
-        {isDark ? (
-          <Sun className="w-5 h-5 text-gray-900 dark:text-gray-300" />
-        ) : (
-          <Moon className="w-5 h-5 text-gray-900 dark:text-gray-300" />
-        )}
-      </button> */}
 
       <button className="md:hidden" onClick={handleMenu}>
         <Menu className="w-8 h-8 ml-2 text-gray-900 dark:text-gray-300" />
