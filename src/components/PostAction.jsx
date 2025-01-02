@@ -5,12 +5,14 @@ import { Heart, MessageCircle, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import CommentModal from "./CommentModal";
+import { fetchComments } from "@/services/fetchComments";
 
 const PostAction = ({ postId, currentUser }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [likes, setLikes] = useState({});
   const [likedStatus, setLikedStatus] = useState(null);
   const [totalLikes, setTotalLikes] = useState(0);
+  const [totalComments, setTotalComents] = useState([]);
 
   useEffect(() => {
     const likesRef = ref(db, `posts/${postId}/likes`);
@@ -30,6 +32,10 @@ const PostAction = ({ postId, currentUser }) => {
 
     return () => unsubscribe();
   }, [postId, currentUser]);
+
+  useEffect(() => {
+    fetchComments(postId, setTotalComents);
+  }, [postId]);
 
   const handleLike = async () => {
     if (!currentUser) return;
@@ -72,13 +78,19 @@ const PostAction = ({ postId, currentUser }) => {
         className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400"
         onClick={openModal}
       >
-        <MessageCircle className="w-5 h-5" /> 3 Comments
+        <MessageCircle className="w-5 h-5" /> {totalComments?.length} Comments
       </button>
       <span className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400">
         <Send className="w-5 h-5" /> Share
       </span>
 
-      {isOpened && <CommentModal closeModal={closeModal} />}
+      {isOpened && (
+        <CommentModal
+          closeModal={closeModal}
+          currentUser={currentUser}
+          postId={postId}
+        />
+      )}
     </div>
   );
 };
