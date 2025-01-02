@@ -130,7 +130,7 @@ const UploadForm = ({ closeModal }) => {
         <textarea
           ref={textAreaRef}
           className="w-full dark:bg-transparent dark:text-gray-300 text-gray-600 p-2 rounded outline-none resize-none overflow-hidden text-sm placeholder:text-lg"
-          placeholder="What's on your mind?"
+          placeholder="Describe your event..."
           value={postText}
           onChange={(e) => setPostText(e.target.value)}
           onInput={handleInput}

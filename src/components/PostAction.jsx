@@ -7,7 +7,7 @@ import { FaHeart } from "react-icons/fa6";
 import CommentModal from "./CommentModal";
 import { fetchComments } from "@/services/fetchComments";
 
-const PostAction = ({ postId, currentUser }) => {
+const PostAction = ({ postId, currentUser, author }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [likes, setLikes] = useState({});
   const [likedStatus, setLikedStatus] = useState(null);
@@ -89,6 +89,7 @@ const PostAction = ({ postId, currentUser }) => {
           closeModal={closeModal}
           currentUser={currentUser}
           postId={postId}
+          author={author}
         />
       )}
     </div>

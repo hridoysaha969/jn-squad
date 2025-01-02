@@ -4,10 +4,9 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { MdSend } from "react-icons/md";
-import SkeletonComment from "./SkeletonComment";
 import Comments from "./Comments";
 
-const CommentModal = ({ closeModal, currentUser, postId }) => {
+const CommentModal = ({ closeModal, currentUser, postId, author }) => {
   const [comment, setComment] = useState("");
 
   const handleSubmitComment = async () => {
@@ -37,6 +36,11 @@ const CommentModal = ({ closeModal, currentUser, postId }) => {
 
     setComment("");
   };
+  const customizeDisplayName = (displayName) => {
+    if (displayName) {
+      return displayName.split(" ")[0];
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-gray-100 dark:bg-black dark:bg-opacity-70 bg-opacity-80 flex md:items-center items-end justify-center">
@@ -45,7 +49,7 @@ const CommentModal = ({ closeModal, currentUser, postId }) => {
           {/* Author Name and Close Button */}
           <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-2 bg-white dark:bg-gray-800 border-b border-gray-400 rounded-t-md">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300">
-              {"Hridoy's"} post
+              {`${customizeDisplayName(author.displayName)}'s`} post
             </h2>
             <button
               onClick={closeModal}

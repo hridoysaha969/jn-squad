@@ -39,7 +39,7 @@ const Comments = ({ postId }) => {
                   <h3 className="text-sm font-semibold">
                     {comment.authorName}
                   </h3>
-                  <p className="text-sm">{comment.text}</p>
+                  <p className="text-sm pl-1">{comment.text}</p>
                 </div>
                 <span className="text-gray-600 dark:text-gray-400 text-xs px-2">
                   {getTimeAgo(comment.timeStamp)}
