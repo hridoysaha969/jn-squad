@@ -1,10 +1,12 @@
+"use client";
 import Image from "next/image";
 import SkeletonComment from "./SkeletonComment";
 import { useEffect, useState } from "react";
 import { fetchComments } from "@/services/fetchComments";
 import { getTimeAgo } from "@/lib/getTimeAgo";
+import { cn } from "@/lib/utils";
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId, individual }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +17,14 @@ const Comments = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div className="flex-1 h-full bg-white dark:bg-gray-800 px-4 py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+    <div
+      className={cn(
+        "flex-1 h-full bg-white dark:bg-gray-800 px-4 py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200",
+        {
+          "bg-transparent": individual,
+        }
+      )}
+    >
       <div className="">
         {/* Example Comments */}
         {loading ? (
