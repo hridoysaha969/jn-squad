@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Sponsored from "./Sponsored";
 
 const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
   // const [isDark, setIsDark] = useState(false);
@@ -66,6 +67,13 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
         )}
         {user?.displayName}
       </Link>
+
+      <div className="my-3 shadow-md pb-3 px-2 sm:hidden">
+        <h2 className="text-xs border-b border-gray-400 pb-2 font-semibold text-gray-600 dark:text-gray-300 uppercase mb-2">
+          <span>Sponsored</span>
+        </h2>
+        <Sponsored />
+      </div>
 
       <ul
         className={cn(
