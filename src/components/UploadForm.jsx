@@ -3,12 +3,8 @@ import { useAuth } from "@/context/AuthContext";
 import { Images } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
-import { db, storage } from "@/lib/firebaseConfig";
+import { useToast } from "@/hooks/use-toast";
+import { db } from "@/lib/firebaseConfig";
 import { push, ref, update } from "firebase/database";
 
 const UploadForm = ({ closeModal }) => {
@@ -19,6 +15,7 @@ const UploadForm = ({ closeModal }) => {
   const [loading, setLoading] = useState(false);
   const textAreaRef = useRef(null);
   const { currentUser } = useAuth();
+  const { toast } = useToast();
 
   const handleInput = () => {
     if (textAreaRef.current) {
@@ -42,7 +39,6 @@ const UploadForm = ({ closeModal }) => {
     if (!currentUser) {
       return;
     }
-    console.log("User authenticated");
 
     if (
       postText.trim() === "" ||
@@ -52,7 +48,6 @@ const UploadForm = ({ closeModal }) => {
       textAreaRef.current.focus();
       return;
     }
-    console.log("User provided all the data");
 
     try {
       setLoading(true);
@@ -80,8 +75,6 @@ const UploadForm = ({ closeModal }) => {
       const newPostRef = ref(db, "posts");
       const postKey = push(newPostRef).key;
 
-      console.log("post created & ref is :", postKey);
-
       const postData = {
         authorId: currentUser.uid,
         title: postTitle,
@@ -100,7 +93,11 @@ const UploadForm = ({ closeModal }) => {
       await update(ref(db), updates);
       console.log("Post uploaded");
 
-      alert("Event posted successfully!");
+      toast({
+        title: "🎉Post Published!",
+        description:
+          "Your post is published successfully. It is under review, Once it is pproved, post will be visible to your feed.",
+      });
       setPostTitle("");
       setPostText("");
       setPostImage(null);

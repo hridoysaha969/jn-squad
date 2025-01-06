@@ -18,8 +18,6 @@ export const fetchApprovedPosts = async () => {
       });
     }
 
-    console.log(posts);
-
     return posts;
   } catch (error) {
     console.log("Error fetching approved posts:", error);

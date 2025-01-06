@@ -61,9 +61,9 @@ const PostAction = ({ postId, currentUser, author }) => {
   };
 
   return (
-    <div className="flex px-3 items-center justify-between mt-3 pt-2 border-t border-gray-300 dark:border-gray-500 gap-3">
+    <div className="flex px-8 items-center justify-start mt-3 py-4 dark:border-gray-500 gap-3">
       <button
-        className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400"
+        className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400 bg-slate-200 dark:bg-gray-700 py-1 px-2 rounded-full"
         onClick={handleLike}
       >
         {likedStatus && likedStatus === true ? (
@@ -71,18 +71,18 @@ const PostAction = ({ postId, currentUser, author }) => {
         ) : (
           <Heart className="w-5 h-5" />
         )}{" "}
-        {totalLikes} Likes
+        {totalLikes}
       </button>
 
       <button
-        className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400"
+        className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400 bg-slate-200 dark:bg-gray-700 py-1 px-2 rounded-full"
         onClick={openModal}
       >
-        <MessageCircle className="w-5 h-5" /> {totalComments?.length} Comments
+        <MessageCircle className="w-5 h-5" /> {totalComments?.length}
       </button>
-      <span className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400">
-        <Send className="w-5 h-5" /> Share
-      </span>
+      <button className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400 bg-slate-200 dark:bg-gray-700 py-1 px-4 rounded-full">
+        <Send className="w-5 h-5" />
+      </button>
 
       {isOpened && (
         <CommentModal

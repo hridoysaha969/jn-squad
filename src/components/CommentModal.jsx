@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { MdSend } from "react-icons/md";
 import Comments from "./Comments";
+import { useToast } from "@/hooks/use-toast";
 
 const CommentModal = ({ closeModal, currentUser, postId, author }) => {
   const [comment, setComment] = useState("");
+  const { toast } = useToast();
 
   const handleSubmitComment = async () => {
     if (comment.trim().length === 0) return;
@@ -29,7 +31,11 @@ const CommentModal = ({ closeModal, currentUser, postId, author }) => {
 
       await update(ref(db), updates);
 
-      console.log("comment added successfully");
+      toast({
+        title: "Comment added!",
+        description:
+          "Your comment added to this post successfully. It is visible to everyone.",
+      });
     } catch (error) {
       console.log("Failed to add comment", error);
     }

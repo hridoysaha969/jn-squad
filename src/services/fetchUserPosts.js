@@ -6,7 +6,7 @@ export const fetchUserPosts = async (userId) => {
     const userPostRef = ref(db, `users/${userId}/posts`);
     const snapshot = await get(userPostRef);
 
-    const userPosts = [];
+    let userPosts = [];
     if (snapshot.exists()) {
       const postIds = Object.keys(snapshot.val());
 
@@ -16,9 +16,8 @@ export const fetchUserPosts = async (userId) => {
           userPosts.push({ id: postId, ...postSnapshot.val() });
         }
       }
+      userPosts = userPosts.sort((a, b) => b.timeStamp - a.timeStamp);
     }
-
-    console.log("User posts: ", userPosts);
 
     return userPosts;
   } catch (error) {

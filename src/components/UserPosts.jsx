@@ -14,8 +14,8 @@ const UserPosts = () => {
     setLoading(true);
     if (currentUser) {
       fetchUserPosts(currentUser.uid).then((post) => {
-        const sortedPosts = post.sort((a, b) => b.timeStamp - a.timeStamp);
-        setUserPosts(sortedPosts);
+        // const sortedPosts = post?.sort((a, b) => b.timeStamp - a.timeStamp);
+        setUserPosts(post);
       });
     }
     setLoading(false);
@@ -31,7 +31,7 @@ const UserPosts = () => {
           <SkeletonPost />
           <SkeletonPost />
         </>
-      ) : userPosts.length > 0 ? (
+      ) : userPosts && userPosts?.length > 0 ? (
         userPosts.map((post) => <Post key={post.id} post={post} />)
       ) : (
         <p className="text-gray-500 dark:text-gray-300 text-center">

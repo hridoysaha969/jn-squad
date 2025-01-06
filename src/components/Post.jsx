@@ -34,7 +34,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <article className="bg-white dark:bg-gray-800 p-2 shadow-md rounded-sm">
+    <article className="bg-white dark:bg-gray-800 p-2 px-4 shadow-md rounded-lg">
       {/* Post Header */}
       <div className="flex justify-between items-center mb-2">
         <div className=" flex items-center gap-2">
@@ -82,7 +82,7 @@ const Post = ({ post }) => {
           width={80}
           alt="Post Image"
           priority
-          className="aspect-[4/3] md:aspect-video w-1/2 object-contain rounded-md"
+          className="aspect-[4/3] md:aspect-[16/7] w-1/2 object-contain rounded-lg"
         />
       </div>
 
