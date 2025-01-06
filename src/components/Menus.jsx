@@ -104,7 +104,12 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
         </li>
 
         <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold">
-          <Settings className="w-5 h-5 text-violet-500" /> Settings
+          <Link
+            href="/settings"
+            className="flex md:items-center gap-2 flex-col md:flex-row"
+          >
+            <Settings className="w-5 h-5 text-violet-500" /> Settings
+          </Link>
         </li>
         <li
           className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold"

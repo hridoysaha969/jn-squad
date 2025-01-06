@@ -61,7 +61,7 @@ const PostAction = ({ postId, currentUser, author }) => {
   };
 
   return (
-    <div className="flex px-8 items-center justify-start mt-3 py-4 dark:border-gray-500 gap-3">
+    <div className="flex px-1 md:px-4 items-center justify-start mt-3 dark:border-gray-500 gap-3">
       <button
         className="flex items-center gap-1 text-sm cursor-pointer hover:text-gray-500 dark:hover:text-gray-400 bg-slate-200 dark:bg-gray-700 py-1 px-2 rounded-full"
         onClick={handleLike}

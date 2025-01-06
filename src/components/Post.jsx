@@ -34,7 +34,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <article className="bg-white dark:bg-gray-800 p-2 px-4 shadow-md rounded-lg">
+    <article className="bg-white dark:bg-gray-800 p-3 shadow-md rounded-lg">
       {/* Post Header */}
       <div className="flex justify-between items-center mb-2">
         <div className=" flex items-center gap-2">

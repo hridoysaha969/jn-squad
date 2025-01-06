@@ -25,7 +25,7 @@ const PostAuthor = ({ post }) => {
   return (
     <div className="mb-4 bg-gray-200 dark:bg-gray-800 p-2 rounded-md flex items-center gap-2">
       <Image
-        src="/avatar.png"
+        src={author?.photoURL || "/avatar.png"}
         height={40}
         width={40}
         alt="Author"
