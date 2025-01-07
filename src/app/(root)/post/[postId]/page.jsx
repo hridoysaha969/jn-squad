@@ -64,12 +64,14 @@ const PostDetails = async ({ params }) => {
             </p>
           </div>
 
-          <div className="mt-8 max-h-[600px] overflow-y-auto">
+          <div className="mt-8">
             <h3 className="font-semibold text-gray-600 dark:text-gray-300 text-lg mb-3 border-b pb-2 border-gray-400">
               What people say!
             </h3>
 
-            <Comments postId={postId} individual={true} />
+            <div className="max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+              <Comments postId={postId} individual={true} />
+            </div>
           </div>
         </div>
       </article>

@@ -30,14 +30,12 @@ const CommentModal = ({ closeModal, currentUser, postId, author }) => {
       updates[`posts/${postId}/comments/${commentId}`] = newComment;
 
       await update(ref(db), updates);
-
-      toast({
-        title: "Comment added!",
-        description:
-          "Your comment added to this post successfully. It is visible to everyone.",
-      });
     } catch (error) {
-      console.log("Failed to add comment", error);
+      toast({
+        variant: "destructive",
+        title: "Failed to comment!",
+        description: "There is an error to add comment. Please try again.",
+      });
     }
 
     setComment("");

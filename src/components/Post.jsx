@@ -87,7 +87,13 @@ const Post = ({ post }) => {
       </div>
 
       {/* Visitors actions */}
-      <PostAction postId={post?.id} currentUser={currentUser} author={author} />
+      <PostAction
+        postId={post?.id}
+        currentUser={currentUser}
+        author={author}
+        postTitle={post?.title}
+        postDescription={post?.description}
+      />
     </article>
   );
 };
