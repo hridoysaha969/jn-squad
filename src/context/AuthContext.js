@@ -57,7 +57,6 @@ export const AuthProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
       metadata: userCredential.user.metadata,
     });
-    console.log(userCredential.user);
 
     return userCredential;
   };

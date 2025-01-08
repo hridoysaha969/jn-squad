@@ -8,6 +8,7 @@ const CustomInput = ({
   handleChange,
   error,
   placeholder,
+  readonly,
 }) => {
   return (
     <div className="form-item">
@@ -26,6 +27,7 @@ const CustomInput = ({
           name={name}
           value={value}
           onChange={handleChange}
+          readOnly={readonly}
         />
         {error && !value && <FormMessage message={`This field is required`} />}
       </div>

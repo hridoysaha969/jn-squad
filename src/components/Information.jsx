@@ -1,13 +1,24 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { fetchSingleUser } from "@/services/fetchSingleUser";
 import { sendEmailVerification } from "firebase/auth";
 import { BadgeCheck, BadgeX, GraduationCap, Mail, MapPin } from "lucide-react";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const Information = () => {
+  const [userData, setUserData] = useState({});
   const { currentUser } = useAuth();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const getData = async () => {
+      const userData = await fetchSingleUser(currentUser?.uid);
+      setUserData(userData);
+    };
+    getData();
+  }, [currentUser]);
 
   if (!currentUser) return null;
 
@@ -67,17 +78,35 @@ const Information = () => {
         <li className="mt-2">
           <p className="text-gray-600 text-xs dark:text-gray-300 flex items-center gap-1">
             <MapPin className="w-4 h-4" /> Address{" "}
-            <span className="font-semibold text-gray-600 dark:text-gray-100">
-              Dhaka, Bangladesh
-            </span>
+            {userData.address ? (
+              <span className="font-semibold text-gray-600 dark:text-gray-100">
+                {userData?.address}
+              </span>
+            ) : (
+              <Link
+                href="/settings"
+                className="text-blue-400 font-semibold text-sm"
+              >
+                Add+
+              </Link>
+            )}
           </p>
         </li>
         <li className="mt-2">
           <p className="text-gray-600 text-xs dark:text-gray-300 flex items-center gap-1">
             <GraduationCap className="w-4 h-4" /> Group{" "}
-            <span className="font-semibold text-gray-600 dark:text-gray-100">
-              Science
-            </span>
+            {userData.group ? (
+              <span className="font-semibold text-gray-600 dark:text-gray-100">
+                {userData.group}
+              </span>
+            ) : (
+              <Link
+                href="/settings"
+                className="text-blue-400 font-semibold text-sm"
+              >
+                Add+
+              </Link>
+            )}
           </p>
         </li>
       </ul>

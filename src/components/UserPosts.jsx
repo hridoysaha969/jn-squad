@@ -13,7 +13,7 @@ const UserPosts = () => {
   useEffect(() => {
     setLoading(true);
     if (currentUser) {
-      fetchUserPosts(currentUser.uid).then((post) => {
+      fetchUserPosts(currentUser?.uid).then((post) => {
         // const sortedPosts = post?.sort((a, b) => b.timeStamp - a.timeStamp);
         setUserPosts(post);
       });

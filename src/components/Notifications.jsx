@@ -20,7 +20,7 @@ const Notifications = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchUserNotifications(currentUser.uid, setNotifications);
+    fetchUserNotifications(currentUser?.uid, setNotifications);
     setLoading(false);
   }, [currentUser]);
 
@@ -34,11 +34,11 @@ const Notifications = () => {
     return total;
   };
   const handleMarkRead = async () => {
-    markNotificationsAsRead(currentUser.uid, notifications);
+    markNotificationsAsRead(currentUser?.uid, notifications);
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu className="max-h-[70vh]">
       <DropdownMenuTrigger className="md:bg-gray-200 relative dark:md:bg-gray-700 dark:text-gray-300 outline-none md:h-12 md:w-12 md:rounded-full md:flex md:items-center md:justify-center">
         <Bell className="w-5 h-5 md:w-6 md:h-6 text-gray-900 dark:text-gray-300" />
         {getUnreadNotificationCount(notifications) > 0 && (
@@ -48,7 +48,7 @@ const Notifications = () => {
         )}
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="mr-1 sm:mr-4">
+      <DropdownMenuContent className="mr-1 sm:mr-4 max-h-[70vh]">
         <div className="w-full flex items-center justify-between pr-2">
           <DropdownMenuLabel>Notifications</DropdownMenuLabel>
           <span className="cursor-pointer" onClick={handleMarkRead}>
@@ -63,11 +63,15 @@ const Notifications = () => {
             <Loader2Icon className="w-5 h-5 animate-spin" />
           </DropdownMenuItem>
         )}
-        {!loading &&
-          notifications &&
+        {(!loading && notifications) || notifications.length > 0 ? (
           notifications.map((item, ind) => (
             <DropdownMenuItem key={ind}>{item.message}</DropdownMenuItem>
-          ))}
+          ))
+        ) : (
+          <DropdownMenuItem className="py-2 flex items-center justify-center">
+            No notification!
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

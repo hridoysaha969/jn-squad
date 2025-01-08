@@ -6,7 +6,6 @@ import { useAuth } from "@/context/AuthContext";
 import CreateEvent from "./CreateEvent";
 import EventFeed from "./EventFeed";
 import { fetchApprovedPosts } from "@/services/fetchApprovedPosts";
-import Image from "next/image";
 import RightSideBar from "./RightSideBar";
 
 export default function ResponsiveLayout() {

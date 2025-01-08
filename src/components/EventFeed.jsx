@@ -10,8 +10,10 @@ const EventFeed = ({ posts, loading }) => {
           <SkeletonPost />
           <SkeletonPost />
         </>
+      ) : posts ? (
+        posts?.map((post) => <Post key={post.id} post={post} />)
       ) : (
-        posts.map((post) => <Post key={post.id} post={post} />)
+        <p>No event published yet!</p>
       )}
     </div>
   );

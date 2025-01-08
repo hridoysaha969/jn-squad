@@ -11,7 +11,6 @@ export const updateLikesInDB = async (postId, userId, likeStatus) => {
     }
 
     await update(ref(db), updates);
-    console.log("Like updated successfully");
   } catch (error) {
     console.log("error updating likes", error);
   }

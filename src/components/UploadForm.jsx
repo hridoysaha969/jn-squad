@@ -67,7 +67,6 @@ const UploadForm = ({ closeModal }) => {
         const result = await response.json();
         if (result.success) {
           imgUrl = result.data.url;
-          console.log("Image uploaded & url :", imgUrl);
         } else {
           console.log("Failed to upload image");
         }
