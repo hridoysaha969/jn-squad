@@ -28,7 +28,7 @@ const ShareDrawer = ({ closeDrawer, postId, postTitle, postDescription }) => {
     const currentY = e.touches[0].clientY;
     if (window.outerWidth > 767) return;
 
-    if (startY !== null && currentY - startY > 100) {
+    if (startY !== null && currentY - startY > 50) {
       setOpen(true);
       setTimeout(() => closeDrawer(), 300);
     }
@@ -57,7 +57,7 @@ const ShareDrawer = ({ closeDrawer, postId, postTitle, postDescription }) => {
       {/* Modal Content */}
       <div
         className={cn(
-          "bg-white relative dark:bg-gray-800 w-screen md:w-[500px] h-auto rounded-none md:rounded-lg p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 shadow-md transition-transform",
+          "bg-white relative dark:bg-gray-800 w-screen md:w-[500px] h-2/5 md:h-auto rounded-none md:rounded-lg p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 shadow-md transition-transform",
           {
             "translate-y-full": open,
             "translate-y-0": !open,
@@ -116,10 +116,7 @@ const ShareDrawer = ({ closeDrawer, postId, postTitle, postDescription }) => {
             </Link>
             <button
               className={cn(
-                "dark:bg-gray-600 bg-gray-300 h-10 w-10 rounded-full flex items-center justify-center",
-                {
-                  "bg-blue-400 dark:bg-blue-400": copied,
-                }
+                "dark:bg-gray-600 bg-gray-300 h-10 w-10 rounded-full flex items-center justify-center"
               )}
               onClick={handleCopy}
             >

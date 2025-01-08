@@ -1,9 +1,10 @@
 "use client";
-import { Bell, ChevronDown, Menu, Search } from "lucide-react";
+import { Bell, ChevronDown, Ellipsis, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Menus from "./Menus";
 import { useAuth } from "@/context/AuthContext";
+import Notifications from "./Notifications";
 
 const ActionMenu = () => {
   const [isDark, setIsDark] = useState(false);
@@ -22,7 +23,7 @@ const ActionMenu = () => {
     root.classList.toggle("dark", isDarkPreferred);
   }, []);
 
-  const handleMenu = () => {
+  const handleMenu = async () => {
     setShowMenu(!showMenu);
   };
 
@@ -31,9 +32,8 @@ const ActionMenu = () => {
       <button className="block md:hidden">
         <Search className="w-5 h-5 text-gray-900 dark:text-gray-300" />
       </button>
-      <button className="md:bg-gray-200 dark:md:bg-gray-700 dark:text-gray-300 md:h-12 md:w-12 md:rounded-full md:flex md:items-center md:justify-center">
-        <Bell className="w-5 h-5 md:w-6 md:h-6 text-gray-900 dark:text-gray-300" />
-      </button>
+
+      <Notifications />
 
       <button className="md:hidden" onClick={handleMenu}>
         <Menu className="w-8 h-8 ml-2 text-gray-900 dark:text-gray-300" />

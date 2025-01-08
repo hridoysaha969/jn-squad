@@ -21,6 +21,23 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
   const [selectedMenu, setSelectedMenu] = useState("");
   const { logOut } = useAuth();
   const router = useRouter();
+  const [sponsors, setSponsors] = useState([
+    {
+      imgUrl: "/sp_1.png",
+      title: "Design Professional Website for Your Company",
+      siteUrl: "hridoysaha.dev",
+    },
+    {
+      imgUrl: "/sp_1.png",
+      title: "Develop custom REST APIs for your application",
+      siteUrl: "hridoysaha.dev",
+    },
+    {
+      imgUrl: "/sp_1.png",
+      title: `Build responsive SEO optimized websites with Next.js`,
+      siteUrl: "hridoysaha.dev",
+    },
+  ]);
 
   const handleChange = (e) => {
     const root = document.documentElement;
@@ -34,6 +51,10 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
   const handleLogOut = async () => {
     await logOut();
     router.push("/sign-in");
+  };
+  const randomIndex = () => {
+    const index = Math.floor(Math.random() * sponsors.length);
+    return index;
   };
 
   return (
@@ -72,7 +93,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
         <h2 className="text-xs border-b border-gray-400 pb-2 font-semibold text-gray-600 dark:text-gray-300 uppercase mb-2">
           <span>Sponsored</span>
         </h2>
-        <Sponsored />
+        <Sponsored sponsor={sponsors[randomIndex()]} />
       </div>
 
       <ul
@@ -103,7 +124,10 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
           <BookOpen className="w-5 h-5 text-violet-500" /> About BJNHS
         </li>
 
-        <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold">
+        <li
+          className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold"
+          onClick={() => setShowMenu((prevState) => !prevState)}
+        >
           <Link
             href="/settings"
             className="flex md:items-center gap-2 flex-col md:flex-row"

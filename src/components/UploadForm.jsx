@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { db } from "@/lib/firebaseConfig";
 import { push, ref, update } from "firebase/database";
+import { sendNotifications } from "@/lib/sendNotification";
 
 const UploadForm = ({ closeModal }) => {
   const [postTitle, setPostTitle] = useState("");
@@ -68,7 +69,7 @@ const UploadForm = ({ closeModal }) => {
           imgUrl = result.data.url;
           console.log("Image uploaded & url :", imgUrl);
         } else {
-          console.log("Failed to upload");
+          console.log("Failed to upload image");
         }
       }
 
@@ -91,6 +92,7 @@ const UploadForm = ({ closeModal }) => {
       updates[`/users/${currentUser.uid}/posts/${postKey}`] = true;
 
       await update(ref(db), updates);
+      await sendNotifications(postKey, currentUser.uid);
       console.log("Post uploaded");
 
       toast({

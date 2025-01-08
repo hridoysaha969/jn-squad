@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import Sponsored from "./Sponsored";
 
@@ -8,6 +7,16 @@ const RightSideBar = () => {
     {
       imgUrl: "/sp_1.png",
       title: "Design Professional Website for Your Company",
+      siteUrl: "hridoysaha.dev",
+    },
+    {
+      imgUrl: "/sp_1.png",
+      title: "Develop custom REST APIs for your application",
+      siteUrl: "hridoysaha.dev",
+    },
+    {
+      imgUrl: "/sp_1.png",
+      title: `Build responsive SEO optimized websites with Next.js`,
       siteUrl: "hridoysaha.dev",
     },
   ]);
@@ -21,9 +30,9 @@ const RightSideBar = () => {
 
         {sponsors.length > 0 ? (
           <div>
-            <Sponsored />
-            <Sponsored />
-            <Sponsored />
+            {sponsors.map((item, ind) => (
+              <Sponsored key={ind} sponsor={item} />
+            ))}
           </div>
         ) : (
           <div className="p-3 flex flex-col items-center">
