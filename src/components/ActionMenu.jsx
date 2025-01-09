@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import Menus from "./Menus";
 import { useAuth } from "@/context/AuthContext";
 import Notifications from "./Notifications";
+import SearchResult from "./SearchResult";
 
-const ActionMenu = () => {
+const ActionMenu = ({ isFocused, setIsFocused }) => {
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -23,15 +25,25 @@ const ActionMenu = () => {
     root.classList.toggle("dark", isDarkPreferred);
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    }
+  }, []);
+
   const handleMenu = async () => {
     setShowMenu(!showMenu);
   };
 
   return (
     <div className="flex items-center gap-2 md:gap-4">
-      <button className="block md:hidden">
+      <button className="block md:hidden" onClick={() => setIsFocused(true)}>
         <Search className="w-5 h-5 text-gray-900 dark:text-gray-300" />
       </button>
+
+      {isFocused && isMobile && (
+        <SearchResult mobile={true} setIsFocused={setIsFocused} />
+      )}
 
       <Notifications />
 
