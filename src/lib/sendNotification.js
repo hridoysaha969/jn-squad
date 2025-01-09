@@ -1,7 +1,7 @@
 const { ref, get, update } = require("firebase/database");
 const { db } = require("./firebaseConfig");
 
-export const sendNotifications = async (postId, authorId) => {
+export const sendNotifications = async (postId, authorId, authorName) => {
   try {
     // Fetch all user IDs
     const usersRef = ref(db, "users");
@@ -19,8 +19,10 @@ export const sendNotifications = async (postId, authorId) => {
             .toString(36)
             .substring(2, 9)}`;
           notifications[`notifications/${userId}/${notificationId}`] = {
-            message: "A new post has been published.",
+            message: `just published a new event at JN Squad.`,
+            authorName: authorName,
             postId: postId,
+            authorId: authorId,
             timeStamp: Date.now(),
             read: false,
           };

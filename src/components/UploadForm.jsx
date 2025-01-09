@@ -91,13 +91,17 @@ const UploadForm = ({ closeModal }) => {
       updates[`/users/${currentUser.uid}/posts/${postKey}`] = true;
 
       await update(ref(db), updates);
-      await sendNotifications(postKey, currentUser.uid);
+      await sendNotifications(
+        postKey,
+        currentUser?.uid,
+        currentUser?.displayName
+      );
       console.log("Post uploaded");
 
       toast({
         title: "🎉Post Published!",
         description:
-          "Your post is published successfully. It is under review, Once it is pproved, post will be visible to your feed.",
+          "Your post is published successfully. It is under review, Once it is aproved, post will be visible to your feed.",
       });
       setPostTitle("");
       setPostText("");
@@ -105,8 +109,13 @@ const UploadForm = ({ closeModal }) => {
       setImagePreview(null);
       closeModal();
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to post",
+        description:
+          "Something went wrong while publishing event. Please try again",
+      });
       console.error("Error posting event:", error);
-      alert("Failed to post the event. Try again.");
       setLoading(false);
     } finally {
       setLoading(false);

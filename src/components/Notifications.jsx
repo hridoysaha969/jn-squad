@@ -12,6 +12,7 @@ import { markNotificationsAsRead } from "@/lib/markNotificationsAsRead";
 import { fetchUserNotifications } from "@/services/fetchNotifications";
 import { Bell, CheckCircle2, Ellipsis, Loader2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
+import NotificationItem from "./NotificationItem";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -42,7 +43,7 @@ const Notifications = () => {
       <DropdownMenuTrigger className="md:bg-gray-200 relative dark:md:bg-gray-700 dark:text-gray-300 outline-none md:h-12 md:w-12 md:rounded-full md:flex md:items-center md:justify-center">
         <Bell className="w-5 h-5 md:w-6 md:h-6 text-gray-900 dark:text-gray-300" />
         {getUnreadNotificationCount(notifications) > 0 && (
-          <span className="w-5 absolute -top-1 -right-1 h-5 p-[2px] rounded-full flex justify-center items-center bg-red-400 text-white text-xs">
+          <span className="h-4 w-4 md:w-5 absolute -top-2 -right-2 md:-top-1 md:-right-1 md:h-5 p-[2px] rounded-full flex justify-center items-center bg-red-400 text-white md:text-xs text-[10px]">
             {getUnreadNotificationCount(notifications)}
           </span>
         )}
@@ -65,7 +66,7 @@ const Notifications = () => {
         )}
         {(!loading && notifications) || notifications.length > 0 ? (
           notifications.map((item, ind) => (
-            <DropdownMenuItem key={ind}>{item.message}</DropdownMenuItem>
+            <NotificationItem key={ind} item={item} />
           ))
         ) : (
           <DropdownMenuItem className="py-2 flex items-center justify-center">

@@ -25,17 +25,14 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
     {
       imgUrl: "/sp_1.png",
       title: "Design Professional Website for Your Company",
-      siteUrl: "hridoysaha.dev",
+      domainUrl: "hridoysaha.dev",
+      siteUrl: "https://hridoysaha.vercel.app/",
     },
     {
-      imgUrl: "/sp_1.png",
-      title: "Develop custom REST APIs for your application",
-      siteUrl: "hridoysaha.dev",
-    },
-    {
-      imgUrl: "/sp_1.png",
+      imgUrl: "/sp_2.png",
       title: `Build responsive SEO optimized websites with Next.js`,
-      siteUrl: "hridoysaha.dev",
+      domainUrl: "fiverr.com",
+      siteUrl: "https://www.fiverr.com/s/Ayogk5R",
     },
   ]);
 
@@ -50,6 +47,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
   };
   const handleLogOut = async () => {
     await logOut();
+    setShowMenu((prevState) => !prevState);
     router.push("/sign-in");
   };
   const randomIndex = () => {
