@@ -23,7 +23,7 @@ export async function generateMetadata() {
       title: "Batch 16 - A Tale of Friendship",
       description:
         "Explore the power of lasting friendships formed in school, thriving across miles and years.",
-      url: "https://jnsquad.vercel.app/bjnhs",
+      url: "https://jnsquad.vercel.app/batch-16",
       images: [
         {
           url: "/jn_logo.png", // The image to appear when sharing

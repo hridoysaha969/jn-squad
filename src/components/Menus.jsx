@@ -30,7 +30,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
     },
     {
       imgUrl: "/sp_2.png",
-      title: `Build responsive SEO optimized websites with Next.js`,
+      title: `Build functional and SEO optimized websites.`,
       domainUrl: "fiverr.com",
       siteUrl: "https://www.fiverr.com/s/Ayogk5R",
     },
@@ -115,11 +115,28 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
             <Newspaper className="w-5 h-5 text-violet-500" /> Event Feed
           </Link>
         </li>
-        <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold md:hidden">
-          <ShieldQuestion className="w-5 h-5 text-violet-500" /> About Batch 16
+        <li
+          className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold md:hidden"
+          onClick={() => setShowMenu((prevState) => !prevState)}
+        >
+          <Link
+            href="/batch-16"
+            className="flex md:items-center gap-2 flex-col md:flex-row"
+          >
+            <ShieldQuestion className="w-5 h-5 text-violet-500" /> About Batch
+            16
+          </Link>
         </li>
-        <li className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold md:hidden">
-          <BookOpen className="w-5 h-5 text-violet-500" /> About BJNHS
+        <li
+          className="text-gray-700 text-sm dark:text-gray-300 dark:bg-gray-700 bg-white shadow-md md:shadow-none md:bg-white dark:md:bg-transparent cursor-pointer flex flex-col md:flex-row gap-2 md:items-center py-2 px-4 md:p-0 rounded-md select-none font-semibold md:hidden"
+          onClick={() => setShowMenu((prevState) => !prevState)}
+        >
+          <Link
+            href="/bjnhs"
+            className="flex md:items-center gap-2 flex-col md:flex-row"
+          >
+            <BookOpen className="w-5 h-5 text-violet-500" /> About BJNHS
+          </Link>
         </li>
 
         <li
