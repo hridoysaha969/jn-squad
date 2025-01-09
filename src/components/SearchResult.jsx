@@ -7,9 +7,6 @@ const SearchResult = ({ mobile, setIsFocused }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [loading, setLoading] = useState(false);
-  if (mobile) {
-    document.body.style.overflow = "hidden";
-  }
 
   const handleTyping = () => {
     setLoading(true);
@@ -47,7 +44,10 @@ const SearchResult = ({ mobile, setIsFocused }) => {
           />
           <button
             className="h-5 w-5 bg-gray-300 dark:bg-gray-800 rounded-full flex items-center justify-center"
-            onClick={() => setIsFocused(false)}
+            onClick={() => {
+              setIsFocused(false);
+              document.body.style.overflow = "";
+            }}
           >
             <X className="w-4 h-4 font-bold" />
           </button>

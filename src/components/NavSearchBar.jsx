@@ -18,8 +18,14 @@ const NavSearchBar = ({ isFocused, setIsFocused }) => {
         className="hidden md:block w-full outline-none placeholder:text-gray-400 dark:placeholder:text-gray-200 text-gray-600 dark:bg-gray-600 dark:text-gray-200"
         onChange={handleChange}
         value={searchValue}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onFocus={() => {
+          setIsFocused(true);
+          document.body.style.overflow = "hidden";
+        }}
+        onBlur={() => {
+          setIsFocused(false);
+          document.body.style.overflow = "";
+        }}
       />
       <Search className="w-4 h-4 font-bold" />
 
