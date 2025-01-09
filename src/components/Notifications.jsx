@@ -39,7 +39,7 @@ const Notifications = () => {
   };
 
   return (
-    <DropdownMenu className="max-h-[70vh]">
+    <DropdownMenu className="max-h-[70vh] overflow-y-auto">
       <DropdownMenuTrigger className="md:bg-gray-200 relative dark:md:bg-gray-700 dark:text-gray-300 outline-none md:h-12 md:w-12 md:rounded-full md:flex md:items-center md:justify-center">
         <Bell className="w-5 h-5 md:w-6 md:h-6 text-gray-900 dark:text-gray-300" />
         {getUnreadNotificationCount(notifications) > 0 && (
