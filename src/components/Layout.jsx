@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, Home, ShieldQuestion } from "lucide-react";
+import { BookOpen, Home, ShieldQuestion, UserPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -46,8 +46,8 @@ export default function ResponsiveLayout() {
               </li>
               <li className="text-gray-700 text-sm dark:text-gray-300 flex gap-2 items-center">
                 <Link href="/bjnhs" className="flex gap-2 items-center">
-                  <BookOpen className="w-4 h-4 md:h-6 md:w-6 text-violet-500" />{" "}
-                  About BJNHS
+                  <UserPlus className="w-4 h-4 md:h-6 md:w-6 text-violet-500" />{" "}
+                  Register Now
                 </Link>
               </li>
             </ul>

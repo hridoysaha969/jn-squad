@@ -6,39 +6,27 @@ import Image from "next/image";
 const reviews = [
   {
     name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
     img: "/1.png",
   },
   {
     name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
     img: "/2.png",
   },
   {
     name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
     img: "/3.png",
   },
   {
+    name: "James",
+    img: "/6.png",
+  },
+  {
     name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
     img: "/4.png",
   },
   {
     name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
     img: "/5.png",
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "/6.png",
   },
 ];
 
@@ -67,12 +55,12 @@ export function MarqueeDemo() {
     <div className="relative flex order-1 md:order-2 md:h-screen h-1/2 md:w-1/2 w-full flex-col items-center justify-center overflow-hidden border bg-white dark:bg-gray-800 md:shadow-sm">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
+          <ReviewCard key={review.name} {...review} />
         ))}
       </Marquee>
       <Marquee reverse pauseOnHover className="[--duration:20s]">
         {secondRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
+          <ReviewCard key={review.name} {...review} />
         ))}
       </Marquee>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-gray-50 dark:from-background"></div>

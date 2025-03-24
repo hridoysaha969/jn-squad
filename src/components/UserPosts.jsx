@@ -11,14 +11,28 @@ const UserPosts = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
+    let isMounted = true; // Prevent state update if component unmounts
     setLoading(true);
+
     if (currentUser) {
-      fetchUserPosts(currentUser?.uid).then((post) => {
-        // const sortedPosts = post?.sort((a, b) => b.timeStamp - a.timeStamp);
-        setUserPosts(post);
-      });
+      fetchUserPosts(currentUser.uid)
+        .then((posts) => {
+          if (isMounted) {
+            setUserPosts(posts);
+          }
+        })
+        .finally(() => {
+          if (isMounted) {
+            setLoading(false);
+          }
+        });
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
+
+    return () => {
+      isMounted = false; // Cleanup function to avoid setting state after unmount
+    };
   }, [currentUser]);
 
   if (!currentUser) return null;

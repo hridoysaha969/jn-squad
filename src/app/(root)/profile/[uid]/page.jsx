@@ -7,14 +7,14 @@ const Profile = async () => {
   return (
     <section className="pb-8">
       <div className="max-w-5xl mx-auto px-2 md:px-4 mt-2">
-        <div className="w-full aspect-[16/7] relative overflow-hidden rounded-t-md">
+        {/* <div className="w-full aspect-[16/7] relative overflow-hidden rounded-t-md">
           <Image
-            src="/1.png"
+            src="/4.png"
             alt="Cover Image"
             fill
             className="h-full w-full"
           />
-        </div>
+        </div> */}
         <ProfileHeader />
 
         <div className="mt-4 flex flex-col gap-4 md:flex-row items-start justify-between">

@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { get, ref, set, update } from "firebase/database";
+import { useRouter } from "next/navigation";
 
 const { createContext, useEffect, useContext, useState } = require("react");
 
@@ -18,6 +19,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -57,6 +59,7 @@ export const AuthProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
       metadata: userCredential.user.metadata,
     });
+    router.push("/");
 
     return userCredential;
   };
@@ -80,6 +83,7 @@ export const AuthProvider = ({ children }) => {
       await update(userRef, {
         lastLogin: new Date().toISOString(),
       });
+      router.push("/");
     }
 
     return userCredential;

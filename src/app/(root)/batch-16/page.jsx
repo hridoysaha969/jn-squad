@@ -1,11 +1,68 @@
+import FloatingShapes from "@/components/FloatingShapes";
+import HeroSection from "@/components/HeroSection";
+import StudentCard from "@/components/StudentCard";
+import Image from "next/image";
+
+const students = [
+  {
+    name: "John Doe",
+    currentActivity: "Software Engineer at Google",
+    thoughts:
+      "My school days were the foundation of my success. I learned discipline and teamwork.",
+    contactInfo: "john.doe@gmail.com",
+    imageUrl: "/jn_logo.png",
+  },
+  {
+    name: "Hridoy Saha",
+    currentActivity: "Web Developer at Web Lab",
+    thoughts:
+      "My school days were the foundation of my success. I learned discipline and teamwork.",
+    contactInfo: "john.doe@gmail.com",
+    imageUrl: "",
+  },
+  {
+    name: "Hridoy Saha",
+    currentActivity: "Web Developer at Web Lab",
+    thoughts:
+      "My school days were the foundation of my success. I learned discipline and teamwork.",
+    contactInfo: "john.doe@gmail.com",
+    imageUrl: "/jn_logo.png",
+  },
+  {
+    name: "Hridoy Saha",
+    currentActivity: "Web Developer at Web Lab",
+    thoughts:
+      "My school days were the foundation of my success. I learned discipline and teamwork.",
+    contactInfo: "john.doe@gmail.com",
+    imageUrl: "",
+  },
+  {
+    name: "Hridoy Saha",
+    currentActivity: "Web Developer at Web Lab",
+    thoughts:
+      "My school days were the foundation of my success. I learned discipline and teamwork.",
+    contactInfo: "john.doe@gmail.com",
+    imageUrl: "/jn_logo.png",
+  },
+  {
+    name: "Hridoy Saha",
+    currentActivity: "Web Developer at Web Lab",
+    thoughts:
+      "My school days were the foundation of my success. I learned discipline and teamwork.",
+    contactInfo: "john.doe@gmail.com",
+    imageUrl: "/1.png",
+  },
+];
+
 const page = () => {
   return (
-    <section className="md:py-12 py-8">
-      <div className="max-w-5xl px-2 md:px-4 mx-auto">
-        <h1 className="text-2xl text-center md:text-4xl lg:text-6xl mb-4 md:mb-8 font-semibold bg-gradient-to-r dark:from-slate-50 dark:to-blue-400 from-slate-900 to-blue-400 bg-clip-text text-transparent">
-          Batch 16 - A Tale of Friendship <br className="hidden sm:block" />{" "}
-          That Endures
-        </h1>
+    <section className="py-12">
+      <div className="container mx-auto p-4">
+        <div className="masonry-grid">
+          {students.map((card, index) => (
+            <StudentCard key={index} student={card} />
+          ))}
+        </div>
       </div>
     </section>
   );

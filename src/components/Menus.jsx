@@ -9,6 +9,7 @@ import {
   Newspaper,
   Settings,
   ShieldQuestion,
+  UserPlus,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -135,7 +136,7 @@ const Menus = ({ user, setShowMenu, isDark, setIsDark }) => {
             href="/bjnhs"
             className="flex md:items-center gap-2 flex-col md:flex-row"
           >
-            <BookOpen className="w-5 h-5 text-violet-500" /> About BJNHS
+            <UserPlus className="w-5 h-5 text-violet-500" /> Register Now
           </Link>
         </li>
 

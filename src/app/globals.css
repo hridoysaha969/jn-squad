@@ -120,6 +120,34 @@ body {
   background: #94a3b8; /* Thumb color on hover */
 }
 
+.masonry-grid {
+  column-count: 2;
+  column-gap: 1rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@screen sm {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+@screen md {
+  .masonry-grid {
+    column-count: 3;
+  }
+}
+
+@screen lg {
+  .masonry-grid {
+    column-count: 4;
+  }
+}
+
 @layer utilities {
   .input-class {
     @apply text-[16] placeholder:text-[16] read-only:bg-gray-300 read-only:text-gray-500 dark:read-only:text-gray-500 dark:read-only:bg-gray-800 rounded-lg border border-gray-300 text-gray-900 dark:text-gray-300 placeholder:text-gray-500 outline-none py-2 px-4 w-full bg-white dark:bg-gray-700 dark:placeholder:text-gray-300;

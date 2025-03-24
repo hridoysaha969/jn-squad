@@ -26,11 +26,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/sign-in",
-    "/sign-up", // Exclude static files
-    "/profile/:path*",
-    "/post/:path*",
-  ],
+  matcher: ["/", "/sign-in", "/sign-up", "/profile/:path*", "/post/:path*"],
 };
